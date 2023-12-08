@@ -1,14 +1,14 @@
 const express = require("express");
-const dotenv = require("dotenv");
+const { json, urlencoded } = require("express");
+const { config } = require("dotenv");
 const otpRoutes = require("./routes/otpRoutes");
 
 const app = express();
-dotenv.config();
+config();
 const port = process.env.PORT;
 
-app.use(express.json());
-
-app.use(express.urlencoded({ extended: true }));
+app.use(json());
+app.use(urlencoded({ extended: true }));
 
 app.get("/", (req, res) => {
   res.send("Server is running");
@@ -17,5 +17,5 @@ app.get("/", (req, res) => {
 app.use("/auth", otpRoutes);
 
 app.listen(port || 3000, function () {
-  console.log("server is running on port 3000");
+  console.log("server is running on port 3001");
 });
